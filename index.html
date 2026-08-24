@@ -1,135 +1,373 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Royal Genics</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Software engineering, systems integration, and applied AI for federal and private clients.">
+<title>Royal Genics — Software Engineering · Systems Integration · Applied AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root {
-    --bg: #0a0b0d; --bg-raised: #131519; --green: #39ff88; --green-dim: #1f8f52;
-    --line: #23262b; --text: #f2f3f5; --text-dim: #9aa0a8;
+    --bg: #070b12;
+    --bg-alt: #0c131d;
+    --panel: #101a26;
+    --ink: #f0f4f8;
+    --ink-dim: #8fa0b3;
+    --accent: #4da9ff;
+    --accent-ink: #061018;
+    --line: rgba(77, 169, 255, 0.18);
+    --line-strong: rgba(77, 169, 255, 0.4);
+    --radius: 14px;
   }
+
+  :root[data-theme="light"] {
+    --bg: #f5f7fa;
+    --bg-alt: #eaeff5;
+    --panel: #ffffff;
+    --ink: #081018;
+    --ink-dim: #4a5a6c;
+    --accent: #1f6fc4;
+    --accent-ink: #ffffff;
+    --line: rgba(31, 111, 196, 0.22);
+    --line-strong: rgba(31, 111, 196, 0.4);
+  }
+
   * { box-sizing: border-box; }
-  body { margin:0; font-family: -apple-system, "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
-  a { color: inherit; }
-  nav { display:flex; align-items:center; justify-content:space-between; padding: 20px 40px; border-bottom: 1px solid var(--line); }
-  .logo { font-weight: 800; letter-spacing: 0.02em; font-size: 1.1rem; }
-  .logo span { color: var(--green); }
-  .navlinks { display:flex; gap: 28px; font-size: 0.9rem; color: var(--text-dim); list-style:none; margin:0; padding:0; }
-  .navlinks a:hover { color: var(--text); }
-  .cta { background: var(--green); color: #05130a; font-weight: 700; padding: 9px 18px; border-radius: 6px; text-decoration:none; font-size: 0.88rem; }
-  .navright { display:flex; align-items:center; gap: 18px; font-size: 0.9rem; }
 
-  header { padding: 90px 40px 70px; max-width: 1100px; margin: 0 auto; }
-  .eyebrow { color: var(--green); font-weight: 700; letter-spacing: 0.12em; font-size: 0.78rem; text-transform: uppercase; margin-bottom: 18px; }
-  h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; line-height: 1.05; margin: 0 0 20px; letter-spacing: -0.01em; }
-  h1 .accent { color: var(--green); }
-  .sub { color: var(--text-dim); font-size: 1.15rem; max-width: 55ch; line-height: 1.6; margin: 0 0 32px; }
-  .heroctas { display:flex; gap: 14px; margin-bottom: 64px; }
-  .cta-outline { border: 1px solid var(--line); color: var(--text); padding: 11px 22px; border-radius: 6px; text-decoration:none; font-size: 0.92rem; font-weight: 600; }
-  .cta-solid { background: var(--green); color: #05130a; padding: 11px 22px; border-radius: 6px; text-decoration:none; font-size: 0.92rem; font-weight: 700; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
 
-  .mockup { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 12px; padding: 28px; overflow: hidden; position: relative; }
-  .mockup-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
-  svg.graph { width: 100%; height: 260px; display:block; }
-  .node { fill: var(--bg); stroke: var(--green); stroke-width: 1.5; }
-  .nodepulse { fill: var(--green); opacity: 0.9; }
-  .edge { stroke: var(--green-dim); stroke-width: 1.2; }
-  .nlabel { fill: var(--text-dim); font-size: 10px; font-family: monospace; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
 
-  main { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 20px 0 70px; }
-  .card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
-  .card h3 { margin: 0 0 10px; font-size: 1rem; color: var(--green); }
-  .card p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); }
+  a { color: var(--accent); }
 
-  .idband { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 10px; padding: 26px 30px; margin-bottom: 60px; }
-  .idband dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; font-size: 0.9rem; margin: 0; }
-  .idband dt { color: var(--green); font-weight: 600; }
-  .idband dd { margin: 0; color: var(--text-dim); }
+  h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
 
-  footer { border-top: 1px solid var(--line); text-align: center; padding: 28px; color: var(--text-dim); font-size: 0.85rem; }
+  .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .brand { font-weight: 700; letter-spacing: 0.02em; font-size: 1rem; }
+  .brand span { color: var(--accent); }
+  nav.links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  nav.links a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  nav.links a:hover { color: var(--ink); border-color: var(--line-strong); }
+  .nav-cta {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    background: var(--accent);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) { nav.links { display: none; } }
+
+  .sheet-edge { border-top: 1px solid var(--line); position: relative; }
+  .sheet-edge::before {
+    content: attr(data-fig);
+    position: absolute; top: -10px; left: 32px;
+    background: var(--bg); padding: 0 10px;
+    font-size: 0.7rem; letter-spacing: 0.12em; color: var(--ink-dim);
+  }
+
+  section { padding: 96px 0; }
+  section.tight { padding: 72px 0; }
+
+  .hero-band {
+    background: radial-gradient(ellipse 900px 500px at 78% 30%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%), var(--bg);
+  }
+  .hero { padding: 88px 0 64px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .rise-in { animation: riseIn 0.6s ease-out both; }
+  .rise-in.d1 { animation-delay: 0.05s; }
+  .rise-in.d2 { animation-delay: 0.15s; }
+  .rise-in.d3 { animation-delay: 0.25s; }
+  .rise-in.d4 { animation-delay: 0.35s; }
+  @media (prefers-reduced-motion: reduce) { .rise-in { animation: none; } }
+  .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); position: relative; margin-right: 6px; }
+  .live-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); animation: ping 1.6s cubic-bezier(0,0,0.2,1) infinite; }
+  @keyframes ping { 0% { transform: scale(1); opacity: 0.7; } 75%, 100% { transform: scale(2.4); opacity: 0; } }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+
+  .hero h1 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); line-height: 1.08; }
+  .hero h1 .accent { color: var(--accent); }
+  .hero p.sub { font-size: 1.06rem; color: var(--ink-dim); max-width: 48ch; margin-top: 20px; }
+  .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .btn { font-weight: 600; font-size: 0.92rem; padding: 13px 26px; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); }
+  .btn-outline { border: 1px solid var(--line-strong); color: var(--ink); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .diagram { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; font-size: 0.75rem; }
+  .diagram-head { display: flex; justify-content: space-between; color: var(--ink-dim); margin-bottom: 18px; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; }
+  .diagram-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; min-height: 200px; }
+  .node-col { display: flex; flex-direction: column; gap: 10px; }
+  .node { border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 9px 12px; color: var(--ink-dim); background: var(--bg); }
+  .node.core { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--bg)); text-align: center; padding: 22px 14px; font-weight: 700; }
+  .core-wrap { display: flex; justify-content: center; }
+  .diagram-foot { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); color: var(--ink-dim); font-size: 0.72rem; }
+
+  .framing { text-align: left; }
+  .framing h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); max-width: 22ch; }
+  .framing p { color: var(--ink-dim); max-width: 62ch; margin-top: 18px; font-size: 1.02rem; }
+
+  .band-light { background: #ffffff; color: #0a1420; padding: 90px 0; }
+  .band-light .label { color: #1f6fc4; }
+  .band-light h2 { color: #0a1420; }
+  .band-light .lede { color: #4a5a6c; max-width: 60ch; margin-top: 14px; font-size: 1.02rem; }
+  .journey { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; align-items: center; margin-top: 44px; }
+  @media (max-width: 900px) { .journey { grid-template-columns: 1fr; } .journey .arrow { display: none; } }
+  .journey .arrow { color: #1f6fc4; font-size: 1.3rem; text-align: center; }
+  .journey-card { background: #fff; border: 1px solid rgba(31, 111, 196, 0.18); border-radius: 14px; padding: 22px; }
+  .journey-card.now { border-color: rgba(31, 111, 196, 0.5); box-shadow: 0 0 0 1px rgba(31, 111, 196, 0.15); }
+  .journey-card .tag { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6b7a8a; }
+  .journey-card p { margin-top: 8px; font-size: 0.95rem; color: #22303f; }
+
+  .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 44px; border-radius: var(--radius); overflow: hidden; }
+  @media (max-width: 700px) { .cap-grid { grid-template-columns: 1fr; } }
+  .cap-card { background: var(--bg); padding: 32px; }
+  .cap-card .idx { color: var(--accent); font-size: 0.78rem; letter-spacing: 0.1em; }
+  .cap-card h3 { font-size: 1.15rem; margin-top: 10px; }
+  .cap-card p { color: var(--ink-dim); margin-top: 10px; font-size: 0.95rem; }
+
+  .cred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  @media (max-width: 800px) { .cred-grid { grid-template-columns: 1fr; } }
+  .cred-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: var(--panel); }
+  .cred-card .k { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+  .cred-card .v { font-size: 1.3rem; font-weight: 700; margin-top: 8px; font-variant-numeric: tabular-nums; }
+
+  .philosophy { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 800px) { .philosophy { grid-template-columns: 1fr; } }
+  .philosophy blockquote { margin: 0; font-size: 1.5rem; line-height: 1.35; color: var(--ink); border-left: 2px solid var(--accent); padding-left: 22px; }
+  .philosophy p.body { color: var(--ink-dim); margin-top: 20px; font-size: 1rem; }
+
+  .cta-band {
+    background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 30%, var(--bg)) 0%, var(--bg) 75%);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 56px 48px; text-align: center;
+  }
+  .cta-band h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+  .cta-band p { color: var(--ink-dim); margin-top: 14px; }
+  .cta-band .hero-ctas { justify-content: center; margin-top: 30px; }
+
+  footer { padding: 56px 0 40px; }
+  .foot-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .foot-brand { font-weight: 700; }
+  .foot-note { color: var(--ink-dim); font-size: 0.85rem; margin-top: 8px; max-width: 42ch; }
+  .foot-links { display: flex; gap: 22px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .foot-links a { color: var(--ink-dim); text-decoration: none; }
+  .foot-links a:hover { color: var(--accent); }
+  .foot-legal { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 0.78rem; }
 </style>
-</head>
-<body>
-  <nav>
-    <div class="logo">ROYAL<span>GENICS</span></div>
-    <ul class="navlinks">
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#work">Integration Work</a></li>
-      <li><a href="#federal">Federal Contracting</a></li>
-      <li><a href="#company">Company</a></li>
-    </ul>
-    <div class="navright">
-      <a href="#work" class="cta">Get in Touch</a>
-    </div>
-  </nav>
 
-  <header>
-    <div class="eyebrow">Software Engineering &middot; Systems Integration &middot; Applied AI</div>
-    <h1>We build the <span class="accent">connective tissue</span><br>between real systems.</h1>
-    <p class="sub">Royal Genics engineers custom software, automation, and AI-assisted integrations for federal and private clients &mdash; from first-principles code to production delivery.</p>
-    <div class="heroctas">
-      <a href="#capabilities" class="cta-solid">See Capabilities</a>
-      <a href="#federal" class="cta-outline">Federal Credentials</a>
-    </div>
+<header class="nav">
+  <div class="nav-row">
+    <div class="brand">ROYAL<span>·</span>GENICS</div>
+    <nav class="links">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#integration">Integration Work</a>
+      <a href="#federal">Federal Contracting</a>
+      <a href="#contact">Company</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Get in Touch</a>
+  </div>
+</header>
 
-    <div class="mockup">
-      <div class="mockup-label">Live Integration Map &mdash; Standards vs. AI-Assisted Pathway</div>
-      <svg class="graph" viewBox="0 0 700 200">
-        <line class="edge" x1="90" y1="100" x2="260" y2="60"/>
-        <line class="edge" x1="90" y1="100" x2="260" y2="140"/>
-        <line class="edge" x1="260" y1="60" x2="440" y2="100"/>
-        <line class="edge" x1="260" y1="140" x2="440" y2="100"/>
-        <line class="edge" x1="440" y1="100" x2="610" y2="60"/>
-        <line class="edge" x1="440" y1="100" x2="610" y2="140"/>
-        <circle class="node" cx="90" cy="100" r="16"/>
-        <circle class="nodepulse" cx="90" cy="100" r="4"/>
-        <circle class="node" cx="260" cy="60" r="14"/>
-        <circle class="node" cx="260" cy="140" r="14"/>
-        <circle class="node" cx="440" cy="100" r="18"/>
-        <circle class="nodepulse" cx="440" cy="100" r="4"/>
-        <circle class="node" cx="610" cy="60" r="14"/>
-        <circle class="node" cx="610" cy="140" r="14"/>
-        <text class="nlabel" x="60" y="130">machine A</text>
-        <text class="nlabel" x="230" y="30">neutral model</text>
-        <text class="nlabel" x="230" y="175">AI pathway</text>
-        <text class="nlabel" x="410" y="130">middleware</text>
-        <text class="nlabel" x="585" y="30">MES / target</text>
-        <text class="nlabel" x="585" y="175">benchmark</text>
-      </svg>
-    </div>
-  </header>
+<main class="wrap">
 
-  <main>
-    <div class="grid" id="capabilities">
-      <div class="card">
-        <h3>Custom Software Development</h3>
-        <p>Python-based systems, APIs, and integrations built to spec.</p>
-      </div>
-      <div class="card">
-        <h3>AI-Assisted Engineering</h3>
-        <p>Applied use of modern AI tooling for faster, well-documented development &mdash; always human-reviewed before delivery.</p>
-      </div>
-      <div class="card" id="work">
-        <h3>Systems Integration</h3>
-        <p>Connecting disparate platforms &mdash; manufacturing systems, data feeds, internal tools &mdash; through clean, documented interfaces.</p>
-      </div>
-      <div class="card" id="federal">
-        <h3>Federal Contracting Ready</h3>
-        <p>Active SAM.gov registration. Direct experience proposing and scoping federal technical work.</p>
+  <section class="hero hero-band">
+    <div>
+      <div class="label rise-in d1"><span class="live-dot"></span>Software Engineering · Systems Integration · Applied AI</div>
+      <h1 class="rise-in d2" style="margin-top:14px;">We build the <span class="accent">connective tissue</span><br />between real systems.</h1>
+      <p class="sub rise-in d3">Royal Genics engineers custom software, automation, and AI-assisted integrations for federal and private clients — from first-principles code to production delivery.</p>
+      <div class="hero-ctas rise-in d4">
+        <a class="btn btn-solid" href="#capabilities">See Capabilities →</a>
+        <a class="btn btn-outline" href="#federal">Federal Credentials</a>
       </div>
     </div>
-
-    <div class="idband" id="company">
-      <dl>
-        <dt>UEI</dt><dd>UUNYZKVADKE8</dd>
-        <dt>CAGE Code</dt><dd>06U41</dd>
-        <dt>Point of Contact</dt><dd>Orwells Oyakhire</dd>
-      </dl>
+    <div class="diagram rise-in d3">
+      <div class="diagram-head">
+        <span>LIVE INTEGRATION MAP</span>
+        <span><span class="live-dot"></span>ACTIVE</span>
+      </div>
+      <div class="diagram-grid">
+        <div class="node-col">
+          <div class="node">Machine A</div>
+          <div class="node">Neutral Model</div>
+          <div class="node">Middleware</div>
+        </div>
+        <div class="core-wrap">
+          <div class="node core">AI<br />PATHWAY</div>
+        </div>
+        <div class="node-col">
+          <div class="node">MES / Target</div>
+          <div class="node">Benchmark</div>
+          <div class="node">Delivery</div>
+        </div>
+      </div>
+      <div class="diagram-foot">Standards pathway vs. AI-assisted pathway — same target system, documented either way.</div>
     </div>
+  </section>
+
+  <div class="sheet-edge" data-fig="FIG. 01"></div>
+  <section class="framing tight">
+    <div class="label">The problem</div>
+    <h2 style="margin-top:14px;">Most integrations are custom work<br />dressed up as a platform.</h2>
+    <p>Manufacturing systems, data feeds, and internal tools rarely speak the same language out of the box. Most vendors sell a platform and leave the real wiring to you. Royal Genics does the wiring — Python-based systems, APIs, and integrations built to spec, with AI tooling applied where it speeds delivery without skipping the human review before anything ships.</p>
+  </section>
+
   </main>
-  <footer>&copy; 2026 Royal Genics LLC</footer>
-</body>
-</html>
+  <section class="band-light">
+    <div class="wrap">
+      <div class="label">Before / after</div>
+      <h2 style="margin-top:14px;">Most systems run in isolation.<br />Very few report to one integration layer.</h2>
+      <p class="lede">The difference isn't the platform — it's whether the standards pathway and the AI-assisted pathway both land on the same, documented target.</p>
+      <div class="journey">
+        <div class="journey-card">
+          <div class="tag">Where most shops are</div>
+          <p>Disconnected machines and data feeds, manual exports, a spreadsheet holding the mapping between systems.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="journey-card">
+          <div class="tag">What gets built first</div>
+          <p>A documented interface per system — custom software or an AI-assisted pathway, always human-reviewed before delivery.</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="journey-card now">
+          <div class="tag">Where it ends up</div>
+          <p>Every machine, model, and target system reporting through one clean, auditable integration layer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <main class="wrap">
+
+  <div class="sheet-edge" data-fig="FIG. 02"></div>
+  <section id="capabilities">
+    <div class="label">What we build</div>
+    <h2 style="margin-top:14px; font-size: clamp(1.7rem, 3vw, 2.3rem);">Four capabilities.<br />One connective layer.</h2>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="idx">01 / CUSTOM SOFTWARE DEVELOPMENT</div>
+        <h3>Python-based systems, APIs, and integrations built to spec</h3>
+        <p>Real software, not a fragile no-code chain — designed to hold up under the specific requirements of the client and the system it's talking to.</p>
+      </div>
+      <div class="cap-card" id="integration">
+        <div class="idx">02 / SYSTEMS INTEGRATION</div>
+        <h3>Connecting disparate platforms through clean, documented interfaces</h3>
+        <p>Manufacturing systems, data feeds, internal tools — wired together so data moves once and stays correct everywhere it lands.</p>
+      </div>
+      <div class="cap-card">
+        <div class="idx">03 / AI-ASSISTED ENGINEERING</div>
+        <h3>Applied use of modern AI tooling for faster, well-documented delivery</h3>
+        <p>AI accelerates the build — it never replaces the human review that happens before anything ships to a client.</p>
+      </div>
+      <div class="cap-card">
+        <div class="idx">04 / DELIVERY &amp; DOCUMENTATION</div>
+        <h3>Production delivery with a real paper trail</h3>
+        <p>Every integration ships with documentation a client's own team can pick up and maintain — not a black box only we can touch.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-edge" data-fig="FIG. 03"></div>
+  <section id="federal">
+    <div class="label">Federal contracting</div>
+    <h2 style="margin-top:14px; font-size: clamp(1.7rem, 3vw, 2.3rem);">Federal contracting ready.</h2>
+    <p style="color:var(--ink-dim); margin-top:14px; max-width:60ch;">Active SAM.gov registration. Direct experience proposing and scoping federal technical work.</p>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="k">UEI</div>
+        <div class="v">UUNYZKVADKE8</div>
+      </div>
+      <div class="cred-card">
+        <div class="k">CAGE Code</div>
+        <div class="v">06U41</div>
+      </div>
+      <div class="cred-card">
+        <div class="k">Point of Contact</div>
+        <div class="v" style="font-size:1.05rem;">Orwells Oyakhire</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sheet-edge" data-fig="FIG. 04"></div>
+  <section>
+    <div class="philosophy">
+      <blockquote>&ldquo;AI speeds the build. It never skips the review.&rdquo;</blockquote>
+      <p class="body">Every integration we deliver — standards pathway or AI-assisted — goes through the same human review before it reaches a client or a federal target system. Applied AI is a tool for faster, better-documented engineering, not a shortcut around accountability. That line doesn't move, regardless of deadline.</p>
+    </div>
+  </section>
+
+  <div class="sheet-edge" data-fig="FIG. 05"></div>
+  <section id="contact" class="tight">
+    <div class="cta-band">
+      <div class="label">Get in touch</div>
+      <h2 style="margin-top:14px;">Let's scope the integration.</h2>
+      <p>Send over the systems that need to talk to each other, and we'll tell you honestly what it takes to connect them.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="mailto:orwells@agentmail.to">Send an Email →</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/orwells-oyakhire-8b5b74159/">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div>
+        <div class="foot-brand">ROYAL GENICS LLC</div>
+        <div class="foot-note">Software engineering, systems integration, and applied AI — for federal and private clients.</div>
+      </div>
+      <div class="foot-links">
+        <a href="mailto:orwells@agentmail.to">Email</a>
+        <a href="https://www.linkedin.com/in/orwells-oyakhire-8b5b74159/">LinkedIn</a>
+        <a href="#capabilities">Capabilities</a>
+      </div>
+    </div>
+    <div class="foot-legal">© 2026 Royal Genics LLC. UEI UUNYZKVADKE8 · CAGE 06U41.</div>
+  </div>
+</footer>
