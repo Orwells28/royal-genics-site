@@ -219,6 +219,12 @@
   .foot-links a { color: var(--ink-dim); text-decoration: none; }
   .foot-links a:hover { color: var(--accent); }
   .foot-legal { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 0.78rem; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
 
 <header class="nav">
@@ -390,4 +396,11 @@
     </div>
     <div class="foot-legal">© 2026 Royal Genics LLC. UEI UUNYZKVADKE8 · CAGE 06U41.</div>
   </div>
+  <script>
+    document.querySelectorAll('.framing, .band-light .journey-card, #capabilities .cap-card, #federal .cred-card, .philosophy, .cta-band').forEach(function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  </script>
 </footer>
