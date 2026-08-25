@@ -2,9 +2,16 @@
   {
     "name": "NIST MES Development",
     "agency": "NIST",
-    "status": "In Progress - Technical Proposal Drafted",
+    "status": "BLOCKED - real MES compliance gap found",
     "deadline": "2026-08-31T12:00:00-04:00",
-    "nextStep": "Finalize price volume - labor-hour breakdown targeting a 30k flat bid."
+    "nextStep": "Waiting on Renishaw + EOS Developer Network replies for proven machine integration docs; deciding go/no-go by Aug 29-30",
+    "blockers": [
+      "SOW requires MES already tested integrable with EOS 290 and Renishaw RenAM500 -- past tense, hard requirement, not something provable during contract performance",
+      "Real outreach sent to Renishaw (email + web form) and EOS Developer Network -- awaiting real human replies",
+      "EOS side has real public API/OPC-UA docs, live testing feasible once Docker Linux-container support (WSL2) is set up",
+      "Renishaw side has no publicly documented API spec found yet -- depends on their reply",
+      "Deadline Aug 31 2026 noon ET -- real go/no-go call needed by Aug 29-30 based on what is actually provable by then"
+    ]
   },
   {
     "name": "DHS Procurement Modernization CSO",
