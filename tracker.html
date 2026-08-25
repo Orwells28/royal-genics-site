@@ -83,13 +83,21 @@
 </main>
 
 <script>
-  function daysUntil(dateStr) {
+  function parseDeadline(dateStr) {
     if (!dateStr) return null;
-    var target = new Date(dateStr + "T00:00:00");
-    if (isNaN(target.getTime())) return null;
+    // Accept either a full ISO timestamp (with T/offset) or a bare date (YYYY-MM-DD)
+    var target = new Date(/T/.test(dateStr) ? dateStr : dateStr + "T00:00:00");
+    return isNaN(target.getTime()) ? null : target;
+  }
+  function daysUntil(target) {
+    if (!target) return null;
     var now = new Date();
-    now.setHours(0,0,0,0);
-    return Math.round((target - now) / 86400000);
+    return Math.ceil((target - now) / 86400000);
+  }
+  function formatDeadline(target) {
+    if (!target) return null;
+    var opts = { year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" };
+    return target.toLocaleString("en-US", opts) + " " + target.toLocaleTimeString("en-US", { timeZoneName: "short" }).split(" ").pop();
   }
   function statusClass(status) {
     var s = (status || "").toLowerCase();
@@ -104,7 +112,9 @@
       var container = document.getElementById("cards");
       container.innerHTML = "";
       items.forEach(function(item){
-        var days = daysUntil(item.deadline);
+        var target = parseDeadline(item.deadline);
+        var days = daysUntil(target);
+        var deadlineText = target ? formatDeadline(target) : (item.deadline || "TBD");
         var daysHtml = "";
         if (days !== null) {
           var cls = days <= 5 ? "warn" : "ok";
@@ -118,7 +128,7 @@
             '<div class="status-pill ' + statusClass(item.status) + '">' + (item.status || "needs info") + '</div>' +
           '</div>' +
           '<div class="track-meta">' +
-            '<div><div class="meta-label">Deadline</div><div class="meta-value">' + (item.deadline || "TBD") + (daysHtml ? " — " + daysHtml : "") + '</div></div>' +
+            '<div><div class="meta-label">Deadline</div><div class="meta-value">' + deadlineText + (daysHtml ? " — " + daysHtml : "") + '</div></div>' +
             '<div><div class="meta-label">Next Step</div><div class="meta-value">' + (item.nextStep || "—") + '</div></div>' +
           '</div>';
         container.appendChild(card);
