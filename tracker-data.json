@@ -2,15 +2,15 @@
   {
     "name": "NIST MES Development",
     "agency": "NIST",
-    "status": "needs info",
-    "deadline": "",
-    "nextStep": "Admin to provide current status, deadline, and next step."
+    "status": "In Progress - Technical Proposal Drafted",
+    "deadline": "2026-08-31T12:00:00-04:00",
+    "nextStep": "Finalize price volume - labor-hour breakdown targeting a 30k flat bid."
   },
   {
-    "name": "DHS CSO",
+    "name": "DHS Procurement Modernization CSO",
     "agency": "DHS",
-    "status": "needs info",
-    "deadline": "",
-    "nextStep": "Admin to provide current status, deadline, and next step."
+    "status": "Considering - low-effort pitch video, no guaranteed award",
+    "deadline": "2026-08-27T13:00:00-04:00",
+    "nextStep": "Decide whether to submit a 5-minute pitch video and written brief. Solicitation stays open 12 months, no hard loss if this round is missed."
   }
 ]
